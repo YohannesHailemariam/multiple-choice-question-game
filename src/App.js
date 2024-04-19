@@ -1,11 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Signin from "./pages/Signin";
 function App() {
   return (
-    <h1 className="text-2xl font-bold underline">
-      Hello world!
-    </h1>
+    <div>
+      <Signin />
+    </div>
   );
 }
 
