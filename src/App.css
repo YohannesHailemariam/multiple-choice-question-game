@@ -1,6 +1,65 @@
-input:focus ~ label, input.used ~ label {
+input:focus ~ label {
 	top: -20px;
   transform: scale(.75); left: -2px;
 	/* font-size: 14px; */
 	color: #4a89dc;
 }
+
+input.used ~ label {
+	top: -20px;
+  transform: scale(.75); left: -2px;
+	/* font-size: 14px; */
+	color: #4a89dc;
+}
+
+.bar:before, .bar:after {
+	content: '';
+	height: 2px; 
+	width: 0;
+	bottom: 1px; 
+	position: absolute;
+	background: #4a89dc; 
+	transition: all 0.2s ease;
+}
+
+.bar:before { left: 50%; }
+
+.bar:after { right: 50%; }
+
+input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
+
+input:focus ~ .highlight {
+	animation: inputHighlighter 0.3s ease;
+}
+
+@keyframes inputHighlighter {
+	from { background: #4a89dc; }
+	to 	{ width: 0; background: transparent; }
+}
+
+.buttonBlue {
+	background: #4a89dc;
+	text-shadow: 1px 1px 0 rgba(39, 110, 204, .5);
+  }
+  
+  .buttonBlue:hover { background: #357bd8; }
+
+
+  .ripples.is-active .ripplesCircle {
+	animation: ripples .4s ease-in;
+  }
+  
+  
+  /* Ripples animation */
+  
+  @keyframes ripples {
+	0% { opacity: 0; }
+  
+	25% { opacity: 1; }
+  
+	100% {
+	  width: 200%;
+	  padding-bottom: 200%;
+	  opacity: 0;
+	}
+  }
