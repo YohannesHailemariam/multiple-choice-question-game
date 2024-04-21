@@ -1,17 +1,43 @@
 import React from 'react'
 import '../App.css'
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../features/userSlice';
 
 function Signin() {
 
-    //const [name, setName] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        dispatch(
+            login({
+                name: name,
+                email: email,
+                password: password,
+                loggedIn: true,
+            })
+        );
+    };
 
   return (
-    <div className='flex mt-[95px] items-center justify-center'>
-        <form className='w-[380px] pt-10 pr-10 pb-10 pl-5 bg-[#fafafa] border-[1px] border-[#ebebeb] shadow shadow-lg'>
+    <div className='flex mt-[60px] items-center justify-center'>
+        <form 
+        className='w-[380px] pt-10 pr-10 pb-10 pl-5 bg-[#fafafa] border-[1px] border-[#ebebeb] shadow shadow-lg'
+        onSubmit={(e) => handleSubmit(e)}>
+
             <h2 className='text-[#636363] mb-7 flex items-center justify-center text-[28px]'>Login</h2>
+            <div class="relative mb-[45px]">
+                <input className='text-18 pt-[10px] pr-[10px] pb-[10px] pl-[5px] appearance-none block bg-[#fafafa] text-[#636363] w-full border border-0 border-b border-solid border-gray-600 outline-none' 
+                type="name" 
+                value={name} 
+                onChange={(e) => setName(e.target.value)}/><span className="absolute h-[60%] w-[100px] top-[25%] left-0 pointer-events-none opacity-50 highlight"></span><span className="relative block w-[100%] bar"></span>
+                <label className='text-[#999] text-18 font-normal absolute pointer-events-none left-0 top-3 transition-all duration-200 ease'>Name</label>
+            </div>
             <div className="relative mb-[45px]">
                 <input 
                 className='text-18 pt-[10px] pr-[10px] pb-[10px] pl-[5px] appearance-none block bg-[#fafafa] text-[#636363] w-full border border-0 border-b border-solid border-gray-600 outline-none' 
