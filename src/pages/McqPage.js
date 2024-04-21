@@ -60,19 +60,21 @@ function McqPage() {
     const currentQuestion = questions[currentQuestionIndex];
 
     return (
-        <div className='flex mt-[5px] items-center justify-center'>
-            <div className='w-[1000px] pt-10 pr-10 pb-10 pl-5 bg-[#fafafa] border-[1px] border-[#ebebeb] shadow shadow-lg'>
-              <h1 className='flex items-center justify-center mb-10 text-2xl text-[#636363]'>Multiple Choice Game</h1>
-              {showScore ? (
-                <div className='flex items-center justify-center border bg-[#4a89dc] pt-2 pb-2 w-[200px] ml-[365px]'>
-                    <h2 className='text-[#fff] text-2xl flex items-center justify-center'>Your Score: {score}/{questions.length}</h2>
-                </div>
-              ):(
+        <div>
+            <button className='relative inline-block ml-[900px] pt-4 pb-4 pr-20 pl-20 mt-[1em] mr-0 mb-[1em] w-[20%] align-middle text-[#fff] text-16 leading-[20px] antialiased text-center tracking-normal bg-transparent border-0 border-b-2 border-b-solid cursor-pointer transition-all duration-150 ease focus:outline-none bg-[#4a89dc]'>Log Out</button>
+            <div className='flex mt-[5px] items-center justify-center'>
+                <div className='w-[1000px] pt-10 pr-10 pb-10 pl-5 bg-[#fafafa] border-[1px] border-[#ebebeb] shadow shadow-lg'>
+                <h1 className='flex items-center justify-center mb-10 text-2xl text-[#636363]'>Multiple Choice Game</h1>
+                {showScore ? (
+                    <div className='flex items-center justify-center border bg-[#4a89dc] pt-2 pb-2 w-[200px] ml-[365px]'>
+                        <h2 className='text-[#fff] text-2xl flex items-center justify-center'>Your Score: {score}/{questions.length}</h2>
+                    </div>
+                ):(
                 <form onSubmit={handleSubmit}>
-                <div>
-                    <p className='mb-3'><span>{currentQuestionIndex + 1}. </span>{currentQuestion.question}</p>
-                    <ul>
-                        {[...currentQuestion.incorrect_answers, currentQuestion.correct_answer].map((choice, index) => (
+                    <div>
+                        <p className='mb-3'><span>{currentQuestionIndex + 1}. </span>{currentQuestion.question}</p>
+                        <ul>
+                            {[...currentQuestion.incorrect_answers, currentQuestion.correct_answer].map((choice, index) => (
                             <li className='mb-3' key={index}>
                                 <label>
                                     <input
@@ -87,21 +89,22 @@ function McqPage() {
                                 </label>
                             </li>
                         ))}
-                    </ul>
+                        </ul>
+                    </div>
+                    <div className='mt-10 mb-20 flex items-center flex-row gap-[350px]'>
+                        <button type='button' className='inline-block pt-4 pb-4 pr-20 pl-16 mt-[.3em] mr-0 mb-[1em] ml-0 w-[25%] align-middle text-[#fff] text-16 leading-[20px] antialiased text-center tracking-normal bg-transparent border-0 border-b-2 border-b-solid cursor-pointer transition-all duration-150 ease focus:outline-none bg-[#4a89dc]' onClick={handlePrevious} disabled={currentQuestionIndex === 0}>
+                            Previous
+                        </button>
+                        <button type='button' className='inline-block pt-4 pb-4 pr-20 pl-16 mt-[.3em] mr-0 mb-[1em] ml-0 w-[25%] align-middle text-[#fff] text-16 leading-[20px] antialiased text-center tracking-normal bg-transparent border-0 border-b-2 border-b-solid cursor-pointer transition-all duration-150 ease focus:outline-none bg-[#4a89dc]' onClick={handleNext} disabled={currentQuestionIndex === questions.length - 1}>
+                            Next
+                        </button>
+                    </div>
+                    <div className='flex items-center justify-center'>
+                    <button className='relative inline-block pt-4 pb-4 pr-20 pl-20 -mt-[50px] mr-0 mb-[1em] -ml-[100px] w-[40%] align-middle text-[#fff] text-16 leading-[20px] antialiased text-center tracking-normal bg-transparent border-0 border-b-2 border-b-solid cursor-pointer transition-all duration-150 ease focus:outline-none bg-[#4a89dc]' type="submit">Submit Answer</button>
+                    </div>
+                </form>
+                )}
                 </div>
-                <div className='mt-10 mb-20 flex items-center flex-row gap-[350px]'>
-                    <button type='button' className='inline-block pt-4 pb-4 pr-20 pl-16 mt-[.3em] mr-0 mb-[1em] ml-0 w-[25%] align-middle text-[#fff] text-16 leading-[20px] antialiased text-center tracking-normal bg-transparent border-0 border-b-2 border-b-solid cursor-pointer transition-all duration-150 ease focus:outline-none bg-[#4a89dc]' onClick={handlePrevious} disabled={currentQuestionIndex === 0}>
-                        Previous
-                    </button>
-                    <button type='button' className='inline-block pt-4 pb-4 pr-20 pl-16 mt-[.3em] mr-0 mb-[1em] ml-0 w-[25%] align-middle text-[#fff] text-16 leading-[20px] antialiased text-center tracking-normal bg-transparent border-0 border-b-2 border-b-solid cursor-pointer transition-all duration-150 ease focus:outline-none bg-[#4a89dc]' onClick={handleNext} disabled={currentQuestionIndex === questions.length - 1}>
-                        Next
-                    </button>
-                </div>
-                <div className='flex items-center justify-center'>
-                <button className='relative inline-block pt-4 pb-4 pr-20 pl-20 mt-[.3em] mr-0 mb-[1em] ml-0 w-[40%] align-middle text-[#fff] text-16 leading-[20px] antialiased text-center tracking-normal bg-transparent border-0 border-b-2 border-b-solid cursor-pointer transition-all duration-150 ease focus:outline-none bg-[#4a89dc]' type="submit">Submit Answer</button>
-                </div>
-              </form>
-              )}
             </div>
         </div>
     );
