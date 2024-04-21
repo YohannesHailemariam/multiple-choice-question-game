@@ -4,11 +4,14 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../features/userSlice';
 import McqPage from './McqPage';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom';
+import useAuth from '../useAuth';
 
 
 
 function Signin() {
+    const [isAuth, signedin , signedout] = useAuth(false);
+    
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -20,16 +23,18 @@ function Signin() {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-    //    dispatch(
-    //        login({
-    //            name: name,
-    //            email: email,
-    //            password: password,
-    //            loggedIn: true,
-    //       })
-    //    );
-
-    history.push('/mcq');
+        {/*dispatch(
+            login({
+                name: name,
+                email: email,
+                password: password,
+                loggedIn: true,
+           })
+        );*/}
+    
+    history.push('/mcq')
+    signedin();
+    
     };
 
   return (
@@ -61,7 +66,7 @@ function Signin() {
                 onChange={(e) => setPassword(e.target.value)} /><span className="absolute h-[60%] w-[100px] top-[25%] left-0 pointer-events-none opacity-50 highlight"></span><span className="relative block w-[100%] bar"></span>
                 <label className='text-[#999] text-18 font-normal absolute pointer-events-none left-0 top-3 transition-all duration-200 ease'>Password</label>
             </div>
-            <button type="submit" className="relative inline-block pt-4 pb-4 pr-20 pl-20 mt-[.3em] mr-0 mb-[1em] ml-0 w-[100%] align-middle text-[#fff] text-16 leading-[20px] antialiased text-center tracking-normal bg-transparent border-0 border-b-2 border-b-solid cursor-pointer transition-all duration-150 ease focus:outline-none button buttonBlue" onClick={(e) => handleSubmit(e)}>Login
+            <button type="submit"  className="relative inline-block pt-4 pb-4 pr-20 pl-20 mt-[.3em] mr-0 mb-[1em] ml-0 w-[100%] align-middle text-[#fff] text-16 leading-[20px] antialiased text-center tracking-normal bg-transparent border-0 border-b-2 border-b-solid cursor-pointer transition-all duration-150 ease focus:outline-none button buttonBlue" onClick={(e)=>handleSubmit(e)}>Login
                 <div class="absolute top-0 left-0 w-[100%] h-[100%] overflow-hidden bg-transparent ripples buttonRipples"><span class="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 opacity-0 w-0 h-0 border border-r-[50%] bg-white bg-opacity-25 ripplesCircle"></span></div>
             </button>
         </form>

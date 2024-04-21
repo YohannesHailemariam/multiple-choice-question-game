@@ -4,10 +4,15 @@ import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { Redirect } from "react-router-dom/cjs/react-router-dom";
+import ProtectedRoute from "./ProtectedRoutes";
+import useAuth from "./useAuth";
 
 
 function App() {
   const user = useSelector(selectUser);
+  
+  const [isAuth, signedin, signedout] = useAuth(false);
+  
 
   
 
@@ -16,7 +21,7 @@ function App() {
       <div>
         <Switch>
           <Route exact path='/' component={Signin} />
-          <Route exact path='/mcq' component={McqPage} />
+          <ProtectedRoute path="/mcq" component={McqPage} auth={isAuth} />
         </Switch>
       </div>
     </Router>
